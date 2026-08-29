@@ -106,7 +106,7 @@ export default function App() {
     try {
       let data = [];
       if (activeView === "calendar") {
-        data = await taskService.getTasks({ include_completed: true });
+        data = await taskService.getTasks({ view: "calendar", include_completed: true });
       } else if (activeView === "project" && selectedProjectId) {
         data = await taskService.getTasks({ projectId: selectedProjectId });
       } else if (activeView === "priority_1") {

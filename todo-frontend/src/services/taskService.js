@@ -1,8 +1,9 @@
 import api from "./api";
 
 export const taskService = {
-  async getTasks({ view = "inbox", search = "", projectId = null, priority = null } = {}) {
-    const params = { view };
+  async getTasks({ view = "inbox", search = "", projectId = null, priority = null, include_completed = null } = {}) {
+    const params = {};
+    if (view && view !== "all") params.view = view;
     if (search) params.search = search;
     if (projectId) {
       params.view = "project";
@@ -11,6 +12,9 @@ export const taskService = {
     if (priority) {
       params.view = "priority";
       params.priority = priority;
+    }
+    if (include_completed !== null) {
+      params.include_completed = include_completed;
     }
 
     const res = await api.get("/tasks/", { params });

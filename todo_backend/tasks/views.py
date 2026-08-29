@@ -180,6 +180,9 @@ def task_list_create(request):
             queryset = queryset.filter(
                 Q(title__icontains=search_query) | Q(description__icontains=search_query)
             )
+        elif view_filter in ["all", "calendar"]:
+            if not include_completed:
+                queryset = queryset.filter(completed=False)
         elif view_filter == "inbox":
             queryset = queryset.filter(project__isnull=True)
             if not include_completed:
