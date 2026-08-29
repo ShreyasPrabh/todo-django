@@ -157,12 +157,16 @@ export default function CalendarView({
     }
   };
 
-  const handleCreateTaskForDay = (taskData) => {
-    onCreateTask({
-      ...taskData,
-      due_date: selectedDate,
-    });
-    setIsAddingTaskForSelectedDay(false);
+  const handleCreateTaskForDay = async (taskData) => {
+    try {
+      await onCreateTask({
+        ...taskData,
+        due_date: taskData.due_date || selectedDate,
+      });
+      setIsAddingTaskForSelectedDay(false);
+    } catch (err) {
+      console.error("Failed to create task for calendar day:", err);
+    }
   };
 
   // Format selected date for display

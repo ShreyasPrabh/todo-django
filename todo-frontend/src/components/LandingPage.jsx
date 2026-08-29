@@ -10,6 +10,7 @@ import {
   Zap,
   Layers,
   Star,
+  ChevronUp,
 } from "lucide-react";
 import TaskFlowIcon from "./TaskFlowIcon";
 import AuthModal from "./AuthModal";
@@ -325,6 +326,32 @@ export default function LandingPage({ onAuthSuccess }) {
           <span>© 2026 TaskFlow. Built with Django REST Framework & React.</span>
         </div>
       </footer>
+
+      {/* ---------------- Floating Scroll to Top Button ---------------- */}
+      <button
+        className="landing-scroll-top-btn"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        title="Scroll to Top"
+        style={{
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          backgroundColor: "var(--color-primary)",
+          color: "#ffffff",
+          width: "42px",
+          height: "42px",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
+          border: "none",
+          cursor: "pointer",
+          zIndex: 99,
+        }}
+      >
+        <ChevronUp size={22} strokeWidth={2.5} />
+      </button>
 
       {/* ---------------- Auth Modal ---------------- */}
       <AuthModal
