@@ -130,18 +130,26 @@ export default function KanbanBoard({
     setDraggedTaskId(null);
   };
 
-  const handleSaveNew = (taskData, colId) => {
+  const handleSaveNew = async (taskData, colId) => {
     const status = colId === "inprogress" ? "inprogress" : "todo";
-    onCreateTask({
-      ...taskData,
-      status: status,
-    });
-    setAddingToColumn(null);
+    try {
+      await onCreateTask({
+        ...taskData,
+        status: status,
+      });
+      setAddingToColumn(null);
+    } catch (err) {
+      console.error("Failed to save new task in column:", err);
+    }
   };
 
-  const handleSaveEdit = (taskData) => {
-    onUpdateTask(editingTaskId, taskData);
-    setEditingTaskId(null);
+  const handleSaveEdit = async (taskData) => {
+    try {
+      await onUpdateTask(editingTaskId, taskData);
+      setEditingTaskId(null);
+    } catch (err) {
+      console.error("Failed to save edited task in board:", err);
+    }
   };
 
   const priorityColors = {

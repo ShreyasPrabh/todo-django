@@ -51,14 +51,22 @@ export default function TaskList({
     (t) => !t.completed && (!t.due_date || t.due_date >= todayStr)
   );
 
-  const handleSaveNew = (taskData) => {
-    onCreateTask(taskData);
-    setIsAddingTask(false);
+  const handleSaveNew = async (taskData) => {
+    try {
+      await onCreateTask(taskData);
+      setIsAddingTask(false);
+    } catch (err) {
+      console.error("Failed to save new task:", err);
+    }
   };
 
-  const handleSaveEdit = (taskData) => {
-    onUpdateTask(editingTaskId, taskData);
-    setEditingTaskId(null);
+  const handleSaveEdit = async (taskData) => {
+    try {
+      await onUpdateTask(editingTaskId, taskData);
+      setEditingTaskId(null);
+    } catch (err) {
+      console.error("Failed to save edited task:", err);
+    }
   };
 
   const getEmptyStateContent = () => {

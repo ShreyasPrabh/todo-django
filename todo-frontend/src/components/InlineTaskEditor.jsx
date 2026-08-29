@@ -72,6 +72,13 @@ export default function InlineTaskEditor({
         priority: parseInt(priority, 10),
         project: projectId ? parseInt(projectId, 10) : null,
       });
+      if (!initialTask) {
+        setTitle("");
+        setDescription("");
+        setDueDate(defaultDueDate || "");
+        setPriority(4);
+        setProjectId(defaultProjectId || "");
+      }
     } catch (err) {
       console.error("Task submission error:", err);
     } finally {
